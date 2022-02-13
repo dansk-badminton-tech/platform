@@ -15,5 +15,5 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx # {"$imagepolicy": "nembadminton:nembadminton"}
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nginx
