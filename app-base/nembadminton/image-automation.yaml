@@ -34,4 +34,4 @@ spec:
     name: nembadminton
   policy:
     semver:
-      range: '>=1.0.0-0'
+      range: '^0.x'
