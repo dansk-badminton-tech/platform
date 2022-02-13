@@ -2,18 +2,30 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx
-  name: nginx
+    app: nembadminton-worker
+  name: nembadminton-worker
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: nembadminton-worker
   template:
     metadata:
       labels:
-        app: nginx
+        app: nembadminton-worker
     spec:
       containers:
-      - image: nginx # {"$imagepolicy": "nembadminton:nembadminton"}
-        name: nginx
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+        name: nembadminton-worker
+        args: [
+          "php", 
+          "-d",
+          "memory_limit=256M",
+          "artisan",
+          "-vvv",
+          "queue:listen",
+          "--memory",
+          "256",
+          "--timeout",
+          "900"
+        ]
