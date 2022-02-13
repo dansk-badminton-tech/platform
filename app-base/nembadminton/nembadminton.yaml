@@ -15,5 +15,5 @@ spec:
         app: nginx
     spec:
       containers:
-      - image: nginx
+      - image: nginx # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nginx
