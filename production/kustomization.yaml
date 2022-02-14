@@ -3,5 +3,7 @@ kind: Kustomization
 namespace: nembadminton
 resources:
   - ../app-base/
+  - nembadminton-config.yaml
+  - nembadminton-secrets-sealed.yaml
 #patchesStrategicMerge:
 #  - podinfo-values.yaml
