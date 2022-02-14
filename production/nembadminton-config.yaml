@@ -40,3 +40,5 @@ data:
   SESSION_DRIVER: file
   SESSION_LIFETIME: "120"
   TELESCOPE_ENABLED: "false"
+  PASSPORT_PRIVATE_KEY: /opt/nembadminton/oauth-private.key
+  PASSPORT_PUBLIC_KEY: /opt/nembadminton/oauth-public.key
