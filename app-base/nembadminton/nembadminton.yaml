@@ -29,3 +29,12 @@ spec:
           "--timeout",
           "900"
         ]
+        envFrom:
+          - configMapRef:
+              name: nembadminton-config
+          - secretRef:
+              name: nembadminton
+        resources:
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
