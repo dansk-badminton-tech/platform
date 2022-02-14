@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nembadminton-worker
-  name: nembadminton-worker
+    app: nembadminton
+  name: nembadminton
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nembadminton-worker
+      app: nembadminton
   template:
     metadata:
       labels:
-        app: nembadminton-worker
+        app: nembadminton
     spec:
       containers:
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
@@ -29,6 +29,20 @@ spec:
           "--timeout",
           "1800"
         ]
+        envFrom:
+          - configMapRef:
+              name: nembadminton-config
+          - secretRef:
+              name: nembadminton
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+        name: nembadminton-web
         envFrom:
           - configMapRef:
               name: nembadminton-config
