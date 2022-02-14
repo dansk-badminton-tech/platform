@@ -4,6 +4,7 @@ namespace: nembadminton
 resources:
   - ../app-base/
   - nembadminton-config.yaml
+  - nembadminton-secret-files-sealed.yaml
   - nembadminton-secrets-sealed.yaml
 #patchesStrategicMerge:
 #  - podinfo-values.yaml

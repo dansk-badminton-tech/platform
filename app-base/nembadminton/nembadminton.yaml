@@ -14,47 +14,60 @@ spec:
       labels:
         app: nembadminton
     spec:
+      volumes:
+        - name: keypair
+          secret:
+            secretName: nembadminton-secret-files
+            items:
+            - key: oauth-private.key
+              path: oauth-private.key
+            - key: oauth-public.key
+              path: oauth-public.key
       containers:
-      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
-        name: nembadminton-worker
-        args: [
-          "php", 
-          "-d",
-          "memory_limit=512M",
-          "artisan",
-          "-vvv",
-          "queue:listen",
-          "--memory",
-          "512",
-          "--timeout",
-          "1800"
-        ]
-        envFrom:
-          - configMapRef:
-              name: nembadminton-config
-          - secretRef:
-              name: nembadminton
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "256Mi"
-          limits:
-            cpu: "2000m"
-            memory: "2Gi"
-      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
-        name: nembadminton-web
-        envFrom:
-          - configMapRef:
-              name: nembadminton-config
-          - secretRef:
-              name: nembadminton
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "256Mi"
-          limits:
-            cpu: "2000m"
-            memory: "2Gi"
+        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+          name: nembadminton-worker
+          args: [
+            "php", 
+            "-d",
+            "memory_limit=512M",
+            "artisan",
+            "-vvv",
+            "queue:listen",
+            "--memory",
+            "512",
+            "--timeout",
+            "1800"
+          ]
+          envFrom:
+            - configMapRef:
+                name: nembadminton-config
+            - secretRef:
+                name: nembadminton
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "2000m"
+              memory: "2Gi"
+        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+          name: nembadminton-web
+          envFrom:
+            - configMapRef:
+                name: nembadminton-config
+            - secretRef:
+                name: nembadminton
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "2000m"
+              memory: "2Gi"
+          volumeMounts:
+            - name: keypair
+              mountPath: "/var/www/html/storage"
+              readOnly: true
 ---
 apiVersion: batch/v1
 kind: CronJob
