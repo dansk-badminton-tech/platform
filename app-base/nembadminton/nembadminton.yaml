@@ -35,6 +35,9 @@ spec:
           - secretRef:
               name: nembadminton
         resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
           limits:
             cpu: "2000m"
             memory: "2Gi"
@@ -67,4 +70,11 @@ spec:
                   name: nembadminton-config
               - secretRef:
                   name: nembadminton
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "256Mi"
+              limits:
+                cpu: "2000m"
+                memory: "2Gi"
           restartPolicy: OnFailure
