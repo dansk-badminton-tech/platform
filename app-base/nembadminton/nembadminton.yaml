@@ -85,7 +85,7 @@ spec:
         spec:
           containers:
           - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
-            name: nembadminton-cron
+            name: nembadminton-update-all-clubs
             args: [
               "php", 
               "artisan",
@@ -105,7 +105,7 @@ spec:
                 cpu: "2000m"
                 memory: "2Gi"
           - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
-            name: nembadminton-cron
+            name: nembadminton-cache-warm-up
             args: [
               "php", 
               "artisan",
