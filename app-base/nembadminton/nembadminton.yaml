@@ -90,7 +90,27 @@ spec:
               "php", 
               "artisan",
               "-vvv",
-              "badmintonplayer-import:update-all-clubs"
+              "badmintonplayer-api-import:update-all-clubs"
+            ]
+            envFrom:
+              - configMapRef:
+                  name: nembadminton-config
+              - secretRef:
+                  name: nembadminton
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "256Mi"
+              limits:
+                cpu: "2000m"
+                memory: "2Gi"
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+            name: nembadminton-cron
+            args: [
+              "php", 
+              "artisan",
+              "-vvv",
+              "badmintonplayer-api:cache-warm-up"
             ]
             envFrom:
               - configMapRef:
