@@ -15,16 +15,16 @@ spec:
         app: nembadminton
     spec:
       volumes:
-        - name: keypair
-          secret:
-            secretName: nembadminton-secret-files
-            items:
-            - key: oauth-private.key
-              path: oauth-private.key
-            - key: oauth-public.key
-              path: oauth-public.key
+      - name: keypair
+        secret:
+          secretName: nembadminton-secret-files
+          items:
+          - key: oauth-private.key
+            path: oauth-private.key
+          - key: oauth-public.key
+            path: oauth-public.key
       containers:
-        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
           name: nembadminton-worker
           args: [
             "php", 
@@ -50,7 +50,7 @@ spec:
             limits:
               cpu: "2000m"
               memory: "2Gi"
-        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
           name: nembadminton-web
           envFrom:
             - configMapRef:
@@ -84,19 +84,14 @@ spec:
       template:
         spec:
           containers:
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-update-all-clubs
-            args: [
-              "php", 
-              "artisan",
-              "-vvv",
-              "badmintonplayer-api-import:update-all-clubs"
-            ]
+            args: ["php", "artisan", "-vvv", "badmintonplayer-api-import:update-all-clubs"]
             envFrom:
-              - configMapRef:
-                  name: nembadminton-config
-              - secretRef:
-                  name: nembadminton
+            - configMapRef:
+                name: nembadminton-config
+            - secretRef:
+                name: nembadminton
             resources:
               requests:
                 cpu: "100m"
@@ -104,7 +99,7 @@ spec:
               limits:
                 cpu: "2000m"
                 memory: "2Gi"
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.1.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-cache-warm-up
             args: [
               "php", 
@@ -115,10 +110,10 @@ spec:
               "badmintonplayer-api:cache-warm-up"
             ]
             envFrom:
-              - configMapRef:
-                  name: nembadminton-config
-              - secretRef:
-                  name: nembadminton
+            - configMapRef:
+                name: nembadminton-config
+            - secretRef:
+                name: nembadminton
             resources:
               requests:
                 cpu: "100m"
