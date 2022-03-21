@@ -32,7 +32,7 @@ spec:
             "memory_limit=512M",
             "artisan",
             "-vvv",
-            "queue:listen",
+            "queue:work",
             "--memory",
             "512",
             "--timeout",
@@ -108,6 +108,8 @@ spec:
             name: nembadminton-cache-warm-up
             args: [
               "php", 
+              "-d",
+              "memory_limit=512M",
               "artisan",
               "-vvv",
               "badmintonplayer-api:cache-warm-up"
