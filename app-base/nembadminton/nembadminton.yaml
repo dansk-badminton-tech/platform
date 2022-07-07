@@ -24,50 +24,39 @@ spec:
           - key: oauth-public.key
             path: oauth-public.key
       containers:
-        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
-          name: nembadminton-worker
-          args: [
-            "php", 
-            "-d",
-            "memory_limit=512M",
-            "artisan",
-            "-vvv",
-            "queue:work",
-            "--memory",
-            "512",
-            "--timeout",
-            "1800"
-          ]
-          envFrom:
-            - configMapRef:
-                name: nembadminton-config
-            - secretRef:
-                name: nembadminton
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
-            limits:
-              cpu: "2000m"
-              memory: "2Gi"
-        - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
-          name: nembadminton-web
-          envFrom:
-            - configMapRef:
-                name: nembadminton-config
-            - secretRef:
-                name: nembadminton
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
-            limits:
-              cpu: "2000m"
-              memory: "2Gi"
-          volumeMounts:
-            - name: keypair
-              mountPath: "/opt/nembadminton"
-              readOnly: true
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+        name: nembadminton-worker
+        args: ["php", "-d", "memory_limit=512M", "artisan", "-vvv", "queue:work", "--memory", "512", "--timeout", "1800"]
+        envFrom:
+        - configMapRef:
+            name: nembadminton-config
+        - secretRef:
+            name: nembadminton
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+        name: nembadminton-web
+        envFrom:
+        - configMapRef:
+            name: nembadminton-config
+        - secretRef:
+            name: nembadminton
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+        volumeMounts:
+        - name: keypair
+          mountPath: "/opt/nembadminton"
+          readOnly: true
 ---
 apiVersion: batch/v1
 kind: CronJob
@@ -84,7 +73,7 @@ spec:
       template:
         spec:
           containers:
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.2 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-update-all-clubs
             args: ["php", "artisan", "-vvv", "badmintonplayer-api-import:update-all-clubs"]
             envFrom:
@@ -99,16 +88,9 @@ spec:
               limits:
                 cpu: "2000m"
                 memory: "2Gi"
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.1 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.2.2 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-cache-warm-up
-            args: [
-              "php", 
-              "-d",
-              "memory_limit=512M",
-              "artisan",
-              "-vvv",
-              "badmintonplayer-api:cache-warm-up"
-            ]
+            args: ["php", "-d", "memory_limit=512M", "artisan", "-vvv", "badmintonplayer-api:cache-warm-up"]
             envFrom:
             - configMapRef:
                 name: nembadminton-config
