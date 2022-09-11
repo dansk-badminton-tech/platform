@@ -22,7 +22,6 @@ spec:
             value: "no"
           - name: ALLOW_EMPTY_PASSWORD
             value: "yes"
-        #command: ["/opt/bitnami/scripts/redis/run.sh", "--maxmemory", "100mb"]
         ports:
         - containerPort: 6379
         resources: 
