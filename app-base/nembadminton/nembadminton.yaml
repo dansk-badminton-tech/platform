@@ -26,7 +26,7 @@ spec:
       containers:
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.3 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-worker
-        args: ["php", "-d", "memory_limit=512M", "artisan", "-vvv", "queue:work", "--memory", "512", "--timeout", "1800"]
+        args: ["php", "artisan", "-vvv", "horizon"]
         envFrom:
         - configMapRef:
             name: nembadminton-config

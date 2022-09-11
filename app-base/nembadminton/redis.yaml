@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - image: bitnami/redis:6.2
+        name: redis
+        env:
+          - name: REDIS_AOF_ENABLED
+            value: "no"
+          - name: ALLOW_EMPTY_PASSWORD
+            value: "yes"
+        command: ["/opt/bitnami/scripts/redis/run.sh", "--maxmemory", "100mb"]
+        ports:
+        - containerPort: 6379
+        resources: 
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: redis
+  name: redis
+spec:
+  ports:
+  - port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: redis

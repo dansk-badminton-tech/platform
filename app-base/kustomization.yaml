@@ -3,3 +3,4 @@ kind: Kustomization
 resources:
 - nembadminton/nembadminton.yaml
 - nembadminton/image-automation.yaml
+- nembadminton/redis.yaml
