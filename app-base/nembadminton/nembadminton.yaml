@@ -25,7 +25,7 @@ spec:
             path: oauth-public.key
       containers:
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
-        name: nembadminton-worker
+        name: nembadminton-redis-worker
         args: ["php", "artisan", "horizon"]
         envFrom:
         - configMapRef:
@@ -40,7 +40,7 @@ spec:
             cpu: "2000m"
             memory: "2Gi"
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
-        name: nembadminton-worker
+        name: nembadminton-database-worker
         args: ["php", "artisan", "queue:work", "database"]
         envFrom:
         - configMapRef:
