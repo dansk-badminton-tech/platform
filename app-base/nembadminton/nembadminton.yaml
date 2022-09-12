@@ -61,7 +61,39 @@ spec:
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: nembadminton-cron
+  name: nembadminton-update-cache-cron
+spec:
+  schedule: '@midnight'
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      name: nembadminton-cron
+    spec:
+      template:
+        spec:
+          containers:
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
+            name: nembadminton-cache-warm-up
+            args: ["php", "-d", "memory_limit=512M", "artisan", "-vvv", "badmintonplayer-api:cache-warm-up"]
+            envFrom:
+            - configMapRef:
+                name: nembadminton-config
+            - secretRef:
+                name: nembadminton
+            resources:
+              requests:
+                cpu: "100m"
+                memory: "256Mi"
+              limits:
+                cpu: "2000m"
+                memory: "2Gi"
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nembadminton-update-clubs-cron
 spec:
   schedule: '@midnight'
   successfulJobsHistoryLimit: 5
@@ -76,21 +108,6 @@ spec:
           - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-update-all-clubs
             args: ["php", "artisan", "-vvv", "badmintonplayer-api-import:update-all-clubs"]
-            envFrom:
-            - configMapRef:
-                name: nembadminton-config
-            - secretRef:
-                name: nembadminton
-            resources:
-              requests:
-                cpu: "100m"
-                memory: "256Mi"
-              limits:
-                cpu: "2000m"
-                memory: "2Gi"
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
-            name: nembadminton-cache-warm-up
-            args: ["php", "-d", "memory_limit=512M", "artisan", "-vvv", "badmintonplayer-api:cache-warm-up"]
             envFrom:
             - configMapRef:
                 name: nembadminton-config
