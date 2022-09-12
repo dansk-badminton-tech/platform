@@ -26,7 +26,22 @@ spec:
       containers:
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-worker
-        args: ["php", "artisan", "-vvv", "horizon"]
+        args: ["php", "artisan", "horizon"]
+        envFrom:
+        - configMapRef:
+            name: nembadminton-config
+        - secretRef:
+            name: nembadminton
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.5 # {"$imagepolicy": "nembadminton:nembadminton"}
+        name: nembadminton-worker
+        args: ["php", "artisan", "queue:work", "database"]
         envFrom:
         - configMapRef:
             name: nembadminton-config
