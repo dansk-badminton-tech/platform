@@ -34,11 +34,9 @@ spec:
             name: nembadminton
         resources:
           requests:
-            cpu: "100m"
             memory: "256Mi"
           limits:
-            cpu: "2000m"
-            memory: "2Gi"
+            memory: "4Gi"
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.7 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-database-worker
         args: ["php", "artisan", "queue:work", "database"]
@@ -49,10 +47,8 @@ spec:
             name: nembadminton
         resources:
           requests:
-            cpu: "100m"
             memory: "256Mi"
           limits:
-            cpu: "2000m"
             memory: "2Gi"
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.7 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-web
@@ -63,10 +59,8 @@ spec:
             name: nembadminton
         resources:
           requests:
-            cpu: "100m"
             memory: "256Mi"
           limits:
-            cpu: "2000m"
             memory: "2Gi"
         volumeMounts:
         - name: keypair
@@ -98,10 +92,8 @@ spec:
                 name: nembadminton
             resources:
               requests:
-                cpu: "100m"
                 memory: "256Mi"
               limits:
-                cpu: "2000m"
                 memory: "2Gi"
           restartPolicy: OnFailure
 ---
@@ -130,9 +122,7 @@ spec:
                 name: nembadminton
             resources:
               requests:
-                cpu: "100m"
                 memory: "256Mi"
               limits:
-                cpu: "2000m"
                 memory: "2Gi"
           restartPolicy: OnFailure
