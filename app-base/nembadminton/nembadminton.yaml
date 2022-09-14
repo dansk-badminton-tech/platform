@@ -26,7 +26,7 @@ spec:
       containers:
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.7 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-redis-worker
-        args: ["php", "-d", "memory_limit=1000M", "artisan", "horizon"]
+        args: ["php", "artisan", "horizon"]
         envFrom:
         - configMapRef:
             name: nembadminton-config
@@ -90,7 +90,7 @@ spec:
           containers:
           - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.7 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-cache-warm-up
-            args: ["php", "-d", "memory_limit=512M", "artisan", "-vvv", "badmintonplayer-api:cache-warm-up"]
+            args: ["php", "artisan", "badmintonplayer-api:cache-warm-up"]
             envFrom:
             - configMapRef:
                 name: nembadminton-config
@@ -122,7 +122,7 @@ spec:
           containers:
           - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.7 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-update-all-clubs
-            args: ["php", "artisan", "-vvv", "badmintonplayer-api-import:update-all-clubs"]
+            args: ["php", "artisan", "badmintonplayer-api-import:update-all-clubs"]
             envFrom:
             - configMapRef:
                 name: nembadminton-config
