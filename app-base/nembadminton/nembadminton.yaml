@@ -52,6 +52,9 @@ spec:
             memory: "2Gi"
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v0.3.13 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-web
+        env:
+          - name: APP_ENV
+            value: local
         envFrom:
         - configMapRef:
             name: nembadminton-config
