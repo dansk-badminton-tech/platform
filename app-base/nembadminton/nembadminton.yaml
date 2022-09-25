@@ -97,6 +97,7 @@ spec:
     metadata:
       name: nembadminton-cron
     spec:
+      backoffLimit: 0
       template:
         spec:
           containers:
@@ -127,6 +128,7 @@ spec:
     metadata:
       name: nembadminton-cron
     spec:
+      backoffLimit: 0
       template:
         spec:
           containers:
