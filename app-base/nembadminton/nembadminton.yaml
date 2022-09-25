@@ -90,7 +90,7 @@ kind: CronJob
 metadata:
   name: nembadminton-update-cache-cron
 spec:
-  schedule: '0 5 * * *'
+  schedule: '0 3 * * *'
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 3
   jobTemplate:
@@ -121,7 +121,7 @@ kind: CronJob
 metadata:
   name: nembadminton-update-clubs-cron
 spec:
-  schedule: '0 6 * * *'
+  schedule: '0 4 * * *'
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 3
   jobTemplate:
