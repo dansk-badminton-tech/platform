@@ -4,3 +4,4 @@ resources:
 - nembadminton/nembadminton.yaml
 - nembadminton/image-automation.yaml
 - nembadminton/redis.yaml
+- nembadminton/nemespace.yaml
