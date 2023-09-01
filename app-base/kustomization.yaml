@@ -5,3 +5,4 @@ resources:
 - nembadminton/image-automation.yaml
 - nembadminton/redis.yaml
 - nembadminton/namespace.yaml
+- nembadminton/ingress.yaml
