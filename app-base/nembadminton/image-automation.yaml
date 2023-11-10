@@ -2,6 +2,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageUpdateAutomation
 metadata:
   name: nembadminton
+  namespace: nembadminton
 spec:
   git:
     checkout:
@@ -21,6 +22,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImageRepository
 metadata:
   name: nembadminton
+  namespace: nembadminton
 spec:
   image: ghcr.io/dansk-badminton-tech/nembadminton
   interval: 1m0s
@@ -29,6 +31,7 @@ apiVersion: image.toolkit.fluxcd.io/v1beta1
 kind: ImagePolicy
 metadata:
   name: nembadminton
+  namespace: nembadminton
 spec:
   imageRepositoryRef:
     name: nembadminton

@@ -4,6 +4,7 @@ metadata:
   labels:
     app: nembadminton
   name: nembadminton
+  namespace: nembadminton
 spec:
   replicas: 1
   selector:
@@ -76,6 +77,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nembadminton
+  namespace: nembadminton
 spec:
   type: NodePort
   ports:
@@ -89,6 +91,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: nembadminton-update-cache-cron
+  namespace: nembadminton
 spec:
   schedule: '0 3 * * *'
   successfulJobsHistoryLimit: 5
@@ -121,6 +124,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: nembadminton-update-clubs-cron
+  namespace: nembadminton
 spec:
   schedule: '0 4 * * *'
   successfulJobsHistoryLimit: 5
