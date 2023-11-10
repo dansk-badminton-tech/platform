@@ -2,7 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
  name: nembadminton
+ annotations:
+   cert-manager.io/cluster-issuer: letsencrypt
 spec:
+ tls:
+  - hosts:
+    - staging.nembadminton.dk
+    secretName: staging-nembadminton-tls
  rules:
    - host: staging.nembadminton.dk
      http:
