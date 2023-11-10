@@ -6,3 +6,5 @@ resources:
 - nembadminton/redis.yaml
 - nembadminton/namespace.yaml
 - nembadminton/ingress.yaml
+- soketi/namespace.yaml
+- soketi/soketi.yaml

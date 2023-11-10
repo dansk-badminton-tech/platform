@@ -1,0 +1,27 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: soketi
+  namespace: soketi
+spec:
+  interval: 1m0s
+  url: https://helm.soketi.app
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: soketi
+  namespace: soketi
+spec:
+  chart:
+    spec:
+      chart: soketi
+      sourceRef:
+        kind: HelmRepository
+        name: soketi
+      version: 0.3.3
+  interval: 10m0s
+  install:
+    crds: Create
+  targetNamespace: soketi
+
