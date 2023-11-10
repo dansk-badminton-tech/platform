@@ -4,7 +4,7 @@ metadata:
  name: nembadminton
 spec:
  rules:
-   - host: 5.75.255.116
+   - host: staging.nembadminton.dk
      http:
        paths:
          - path: /
