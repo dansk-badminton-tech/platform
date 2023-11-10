@@ -2,12 +2,9 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
  name: nembadminton
- annotations:
-    k8s.ngrok.com/modules: oauth
 spec:
- ingressClassName: ngrok
  rules:
-   - host: pup-ideal-badly.ngrok-free.app
+   - host: 5.75.255.116
      http:
        paths:
          - path: /
@@ -19,16 +16,16 @@ spec:
                  number: 80
 ---
 # Module configurations for OAuth
-kind: NgrokModuleSet
-apiVersion: ingress.k8s.ngrok.com/v1alpha1
-metadata:
-  name: oauth
-modules:
-  oauth:
-    google:
-      emailAddresses:
-        - danielflynygaard@gmail.com
----
+# kind: NgrokModuleSet
+# apiVersion: ingress.k8s.ngrok.com/v1alpha1
+# metadata:
+#   name: oauth
+# modules:
+#   oauth:
+#     google:
+#       emailAddresses:
+#         - danielflynygaard@gmail.com
+# ---
 apiVersion: v1
 kind: Service
 metadata:
