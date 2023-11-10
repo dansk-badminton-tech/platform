@@ -19,9 +19,24 @@ spec:
       sourceRef:
         kind: HelmRepository
         name: soketi
-      version: 0.3.3
+      version: 2.0.0
   interval: 10m0s
   install:
     crds: Create
   targetNamespace: soketi
+  values:
+    ingress:
+      enabled: true
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt
+        nginx.ingress.kubernetes.io/proxy-read-timeout: 3600
+        nginx.ingress.kubernetes.io/proxy-send-timeout: 3600
+      hosts:
+        - host: ws.platform.nembadminton.dk
+          paths:
+            - /
+      tls: 
+        - secretName: ws-platform-nembadminton-tls
+          hosts:
+            - ws.platform.nembadminton.dk
 
