@@ -42,6 +42,8 @@ spec:
             secretKeyRef:
               name: soketi
               key: SOKETI_DEFAULT_APP_SECRET
+        - name: SOKETI_DEBUG
+          value: 1
     ingress:
       enabled: true
       annotations:
