@@ -8,3 +8,4 @@ resources:
 - nembadminton/ingress.yaml
 - soketi/namespace.yaml
 - soketi/soketi.yaml
+- soketi/soketi-secret.yaml

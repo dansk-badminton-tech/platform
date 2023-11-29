@@ -25,6 +25,23 @@ spec:
     crds: Create
   targetNamespace: soketi
   values:
+    app:
+      extraEnv:
+        - name: SOKETI_DEFAULT_APP_ID
+          valueFrom:
+            secretKeyRef:
+              name: soketi
+              key: SOKETI_DEFAULT_APP_ID
+        - name: SOKETI_DEFAULT_APP_KEY
+          valueFrom:
+            secretKeyRef:
+              name: soketi
+              key: SOKETI_DEFAULT_APP_KEY
+        - name: SOKETI_DEFAULT_APP_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: soketi
+              key: SOKETI_DEFAULT_APP_KEY
     ingress:
       enabled: true
       annotations:
