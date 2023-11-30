@@ -46,3 +46,4 @@ data:
   PASSPORT_PRIVATE_KEY: /opt/nembadminton/oauth-private.key
   PASSPORT_PUBLIC_KEY: /opt/nembadminton/oauth-public.key
   PASSPORT_CLIENT_ID: "1"
+  LIGHTHOUSE_SUBSCRIPTION_STORAGE: database
