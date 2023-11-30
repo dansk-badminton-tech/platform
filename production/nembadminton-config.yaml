@@ -33,7 +33,7 @@ data:
   PUSHER_APP_ID: "nembadminton-app-id"
   PUSHER_APP_KEY: "BFA9mqh3bek.wtz4xub"
   PUSHER_HOST: ws.platform.nembadminton.dk
-  PUSHER_PORT: "6001"
+  PUSHER_PORT: "443"
   PUSHER_SCHEME: https
   PUSHER_APP_CLUSTER: ""
   QUEUE_CONNECTION: redis
