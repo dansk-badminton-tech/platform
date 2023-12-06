@@ -6,7 +6,7 @@ metadata:
 data:
   APP_DEBUG: "false"
   APP_ENV: production
-  APP_NAME: Holdkamp
+  APP_NAME: NemBadminton
   APP_URL: https://nembadmintion.dk
   AWS_ACCESS_KEY_ID: ""
   AWS_BUCKET: ""
@@ -47,3 +47,4 @@ data:
   PASSPORT_PUBLIC_KEY: /opt/nembadminton/oauth-public.key
   PASSPORT_CLIENT_ID: "1"
   LIGHTHOUSE_SUBSCRIPTION_STORAGE: database
+  LIGHTHOUSE_SUBSCRIPTION_STORAGE_TTL: "7200"
