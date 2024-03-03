@@ -10,8 +10,11 @@ metadata:
 spec:
  tls:
   - hosts:
-    - staging.nembadminton.dk
+      - staging.nembadminton.dk
     secretName: staging-nembadminton-tls
+  - hosts:
+      - app.nembadminton.dk
+    secretName: app-nembadminton-tls
  rules:
    - host: staging.nembadminton.dk
      http:
@@ -23,18 +26,17 @@ spec:
                name: nembadminton-web
                port:
                  number: 80
+   - host: app.nembadminton.dk
+     http:
+       paths:
+         - path: /
+           pathType: Prefix
+           backend:
+             service:
+               name: nembadminton-web
+               port:
+                 number: 80
 ---
-# Module configurations for OAuth
-# kind: NgrokModuleSet
-# apiVersion: ingress.k8s.ngrok.com/v1alpha1
-# metadata:
-#   name: oauth
-# modules:
-#   oauth:
-#     google:
-#       emailAddresses:
-#         - danielflynygaard@gmail.com
-# ---
 apiVersion: v1
 kind: Service
 metadata:
