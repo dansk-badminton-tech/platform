@@ -12,21 +12,8 @@ spec:
   - hosts:
       - staging.nembadminton.dk
     secretName: staging-nembadminton-tls
-  - hosts:
-      - app.nembadminton.dk
-    secretName: app-nembadminton-tls
  rules:
    - host: staging.nembadminton.dk
-     http:
-       paths:
-         - path: /
-           pathType: Prefix
-           backend:
-             service:
-               name: nembadminton-web
-               port:
-                 number: 80
-   - host: app.nembadminton.dk
      http:
        paths:
          - path: /
