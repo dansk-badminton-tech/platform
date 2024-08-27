@@ -152,36 +152,3 @@ spec:
               limits:
                 memory: "2Gi"
           restartPolicy: OnFailure
----
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: nembadminton-update-points-cron
-  namespace: nembadminton
-spec:
-  schedule: '0 6 * * *'
-  successfulJobsHistoryLimit: 5
-  failedJobsHistoryLimit: 3
-  jobTemplate:
-    metadata:
-      name: nembadminton-cron
-    spec:
-      backoffLimit: 0
-      activeDeadlineSeconds: 1800
-      template:
-        spec:
-          containers:
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.4.1 # {"$imagepolicy": "nembadminton:nembadminton"}
-            name: nembadminton
-            args: ["php", "artisan", "badmintonplayer-scrape-import:update-all-points"]
-            envFrom:
-            - configMapRef:
-                name: nembadminton-config
-            - secretRef:
-                name: nembadminton
-            resources:
-              requests:
-                memory: "256Mi"
-              limits:
-                memory: "2Gi"
-          restartPolicy: OnFailure
