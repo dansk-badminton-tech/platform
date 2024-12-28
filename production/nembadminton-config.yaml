@@ -22,7 +22,7 @@ data:
   LOG_CHANNEL: stack
   MAIL_ENCRYPTION: "null"
   MAIL_FROM_ADDRESS: "robot@nembadminton.dk"
-  MAIL_FROM_NAME: '"${APP_NAME}"'
+  MAIL_FROM_NAME: 'Nembadminton'
   MAIL_HOST: smtp.simply.com
   MAIL_MAILER: smtp
   MAIL_PASSWORD: "null"
