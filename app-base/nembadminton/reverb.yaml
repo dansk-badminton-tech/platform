@@ -18,7 +18,7 @@ spec:
       containers:
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.10.0 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-reverb
-        args: ["artisan", "reverb:start"]
+        args: ["php", "artisan", "reverb:start"]
         envFrom:
         - configMapRef:
             name: nembadminton-config
