@@ -47,7 +47,7 @@ data:
   PASSPORT_PUBLIC_KEY: /opt/nembadminton/oauth-public.key
   PASSPORT_CLIENT_ID: "1"
   LIGHTHOUSE_SUBSCRIPTION_STORAGE: database
-  LIGHTHOUSE_SUBSCRIPTION_STORAGE_TTL: "7200"
+  LIGHTHOUSE_SUBSCRIPTION_STORAGE_TTL: "3600"
   REVERB_APP_ID: "nembadminton-app-id"
   REVERB_APP_KEY: BFA9mqh3bek.wtz4xub
   REVERB_HOST: "ws.platform.nembadminton.dk"
