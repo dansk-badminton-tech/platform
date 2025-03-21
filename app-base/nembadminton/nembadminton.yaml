@@ -40,7 +40,7 @@ spec:
             memory: "4Gi"
       - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.10.0 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-database-worker
-        args: ["php", "artisan", "queue:work", "database"]
+        args: ["php", "artisan", "queue:work", "database", "--timeout", "600"]
         envFrom:
         - configMapRef:
             name: nembadminton-config
