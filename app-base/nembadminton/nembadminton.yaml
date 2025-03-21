@@ -159,7 +159,7 @@ metadata:
   name: nembadminton-cache-clean-cron
   namespace: nembadminton
 spec:
-  schedule: '0 4 * * *'
+  schedule: '0 2 * * *'
   successfulJobsHistoryLimit: 5
   failedJobsHistoryLimit: 3
   jobTemplate:
