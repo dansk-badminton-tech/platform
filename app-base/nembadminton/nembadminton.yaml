@@ -152,3 +152,36 @@ spec:
               limits:
                 memory: "2Gi"
           restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nembadminton-cache-clean-cron
+  namespace: nembadminton
+spec:
+  schedule: '0 4 * * *'
+  successfulJobsHistoryLimit: 5
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      name: nembadminton-cron
+    spec:
+      backoffLimit: 0
+      activeDeadlineSeconds: 1800
+      template:
+        spec:
+          containers:
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.10.0 # {"$imagepolicy": "nembadminton:nembadminton"}
+            name: nembadminton-cache-clean-clubs
+            args: ["php", "artisan", "cache:clean"]
+            envFrom:
+            - configMapRef:
+                name: nembadminton-config
+            - secretRef:
+                name: nembadminton
+            resources:
+              requests:
+                memory: "256Mi"
+              limits:
+                memory: "2Gi"
+          restartPolicy: OnFailure
