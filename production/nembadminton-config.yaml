@@ -51,5 +51,5 @@ data:
   REVERB_APP_ID: "nembadminton-app-id"
   REVERB_APP_KEY: BFA9mqh3bek.wtz4xub
   REVERB_HOST: "ws.platform.nembadminton.dk"
-  REVERB_PORT: 443
+  REVERB_PORT: "443"
   REVERB_SCHEME: https
