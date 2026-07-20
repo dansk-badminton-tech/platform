@@ -7,7 +7,7 @@ data:
   APP_DEBUG: "false"
   APP_ENV: production
   APP_NAME: NemBadminton
-  APP_URL: https://app.nembadmintion.dk
+  APP_URL: https://app.nembadminton.dk
   AWS_ACCESS_KEY_ID: ""
   AWS_BUCKET: ""
   AWS_DEFAULT_REGION: us-east-1
