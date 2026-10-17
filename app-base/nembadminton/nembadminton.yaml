@@ -15,10 +15,15 @@ spec:
       labels:
         app: nembadminton
     spec:
+      # Passport rejects key files that aren't 400/440/600/640/660. Secret files are
+      # owned by root, so give them to www-data's group (Apache runs PHP as www-data).
+      securityContext:
+        fsGroup: 33
       volumes:
       - name: keypair
         secret:
           secretName: nembadminton-secret-files
+          defaultMode: 0440
           items:
           - key: oauth-private.key
             path: oauth-private.key
