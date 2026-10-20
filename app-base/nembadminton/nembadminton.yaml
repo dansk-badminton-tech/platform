@@ -30,7 +30,7 @@ spec:
           - key: oauth-public.key
             path: oauth-public.key
       containers:
-      - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.3 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-redis-worker
         args: ["php", "artisan", "horizon"]
         envFrom:
@@ -43,7 +43,7 @@ spec:
             memory: "256Mi"
           limits:
             memory: "4Gi"
-      - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.3 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-database-worker
         args: ["php", "artisan", "queue:work", "database", "--timeout", "600", "--memory", "1024"]
         envFrom:
@@ -56,7 +56,7 @@ spec:
             memory: "256Mi"
           limits:
             memory: "2Gi"
-      - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+      - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.3 # {"$imagepolicy": "nembadminton:nembadminton"}
         name: nembadminton-web
         env:
         - name: APP_ENV
@@ -110,7 +110,7 @@ spec:
       template:
         spec:
           containers:
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.3 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-cache-warm-up
             args: ["php", "artisan", "badmintonplayer-api:cache-warm-up"]
             envFrom:
@@ -143,7 +143,7 @@ spec:
       template:
         spec:
           containers:
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.3 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-update-all-clubs
             args: ["php", "artisan", "badmintonplayer-api-import:update-all-clubs"]
             envFrom:
@@ -176,7 +176,7 @@ spec:
       template:
         spec:
           containers:
-          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.2 # {"$imagepolicy": "nembadminton:nembadminton"}
+          - image: ghcr.io/dansk-badminton-tech/nembadminton:v1.34.3 # {"$imagepolicy": "nembadminton:nembadminton"}
             name: nembadminton-cache-clean-clubs
             args: ["php", "artisan", "cache:clean"]
             envFrom:
