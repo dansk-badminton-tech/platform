@@ -1,26 +1,19 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
- name: nembadminton
- namespace: nembadminton
- annotations:
-   cert-manager.io/cluster-issuer: letsencrypt
+  name: nembadminton
+  namespace: nembadminton
 spec:
- tls:
-  - hosts:
-      - staging.nembadminton.dk
-    secretName: staging-nembadminton-tls
- rules:
-   - host: staging.nembadminton.dk
-     http:
-       paths:
-         - path: /
-           pathType: Prefix
-           backend:
-             service:
-               name: nembadminton-web
-               port:
-                 number: 80
+  parentRefs:
+    - name: public
+      namespace: envoy-gateway-system
+      sectionName: staging-nembadminton-dk
+  hostnames:
+    - staging.nembadminton.dk
+  rules:
+    - backendRefs:
+        - name: nembadminton-web
+          port: 80
 ---
 apiVersion: v1
 kind: Service

@@ -30,29 +30,22 @@ spec:
           limits:
             memory: "2Gi"
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: nembadminton-reverb
   namespace: nembadminton
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt
 spec:
-  tls:
-    - hosts:
-        - ws.platform.nembadminton.dk
-      secretName: nembadminton-reverb-tls
+  parentRefs:
+    - name: public
+      namespace: envoy-gateway-system
+      sectionName: ws-platform-nembadminton-dk
+  hostnames:
+    - ws.platform.nembadminton.dk
   rules:
-    - host: ws.platform.nembadminton.dk
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: nembadminton-reverb
-                port:
-                  number: 8080
+    - backendRefs:
+        - name: nembadminton-reverb
+          port: 8080
 ---
 apiVersion: v1
 kind: Service
