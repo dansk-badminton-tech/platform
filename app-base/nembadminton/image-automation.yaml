@@ -1,4 +1,4 @@
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageUpdateAutomation
 metadata:
   name: nembadminton
@@ -12,13 +12,13 @@ spec:
       author:
         email: fluxcdbot@users.noreply.github.com
         name: fluxcdbot
-      messageTemplate: '{{range .Updated.Images}}{{println .}}{{end}}'
+      messageTemplate: '{{range .Changed.Changes}}{{println .NewValue}}{{end}}'
   interval: 1m0s
   sourceRef:
     kind: GitRepository
     name: nembadminton-team
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImageRepository
 metadata:
   name: nembadminton
@@ -27,7 +27,7 @@ spec:
   image: ghcr.io/dansk-badminton-tech/nembadminton
   interval: 1m0s
 ---
-apiVersion: image.toolkit.fluxcd.io/v1beta1
+apiVersion: image.toolkit.fluxcd.io/v1
 kind: ImagePolicy
 metadata:
   name: nembadminton
